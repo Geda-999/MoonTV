@@ -11,7 +11,6 @@ const STORAGE_TYPE =
   (process.env.NEXT_PUBLIC_STORAGE_TYPE as
     | 'localstorage'
     | 'redis'
-    | 'd1'
     | 'upstash'
     | undefined) || 'localstorage';
 
@@ -107,12 +106,12 @@ export async function POST(req: NextRequest) {
       // 注册成功，设置认证cookie
       const response = NextResponse.json({ ok: true });
       const cookieValue = await generateAuthCookie(username);
-      const expires = new Date();
-      expires.setDate(expires.getDate() + 7); // 7天过期
+      // const expires = new Date();
+      // expires.setDate(expires.getDate() + 7); // 7天过期
 
       response.cookies.set('auth', cookieValue, {
         path: '/',
-        expires,
+        // expires,
         sameSite: 'lax', // 改为 lax 以支持 PWA
         httpOnly: false, // PWA 需要客户端可访问
         secure: false, // 根据协议自动设置

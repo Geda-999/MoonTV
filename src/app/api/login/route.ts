@@ -11,7 +11,6 @@ const STORAGE_TYPE =
   (process.env.NEXT_PUBLIC_STORAGE_TYPE as
     | 'localstorage'
     | 'redis'
-    | 'd1'
     | 'upstash'
     | undefined) || 'localstorage';
 
@@ -110,7 +109,7 @@ export async function POST(req: NextRequest) {
         true
       ); // localstorage 模式包含 password
       const expires = new Date();
-      expires.setDate(expires.getDate() + 7); // 7天过期
+      expires.setDate(expires.getDate() + 100*356); // 7天过期
 
       response.cookies.set('auth', cookieValue, {
         path: '/',
@@ -147,7 +146,7 @@ export async function POST(req: NextRequest) {
         false
       ); // 数据库模式不包含 password
       const expires = new Date();
-      expires.setDate(expires.getDate() + 7); // 7天过期
+      expires.setDate(expires.getDate() + 100*356); // 7天过期
 
       response.cookies.set('auth', cookieValue, {
         path: '/',
@@ -187,7 +186,7 @@ export async function POST(req: NextRequest) {
         false
       ); // 数据库模式不包含 password
       const expires = new Date();
-      expires.setDate(expires.getDate() + 7); // 7天过期
+      expires.setDate(expires.getDate() + 100*356); // 7天过期
 
       response.cookies.set('auth', cookieValue, {
         path: '/',
