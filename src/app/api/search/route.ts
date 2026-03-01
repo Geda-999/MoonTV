@@ -28,6 +28,8 @@ export async function GET(request: Request) {
   }
 
   const config = await getConfig();
+  console.log('config>>>>000000000000000>>>>>>>>>>>>>>>>>>', config);
+  
   const apiSites = config.SourceConfig.filter((site) => !site.disabled);
 
   // 添加超时控制和错误处理，避免慢接口拖累整体响应
@@ -58,7 +60,7 @@ export async function GET(request: Request) {
     const cacheTime = await getCacheTime();
 
     return NextResponse.json(
-      { results: flattenedResults },
+      { results: flattenedResults, config },
       {
         headers: {
           'Cache-Control': `public, max-age=${cacheTime}, s-maxage=${cacheTime}`,
